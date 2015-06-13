@@ -1,6 +1,177 @@
 /* Empty. Add your own CSS if you like */
 
+#stock-content {
+    /*    background: #000;*/
+}
+
 .current-stock {
     padding-top: 50px;
     height: 200px;
+}
+
+.page-title i {
+    font-size: 4em;
+}
+
+#bear-title {
+    position: absolute;
+    left: 20px;
+    top: 0px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+#bull-title {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.card-stock {
+    /*    border: 1px solid #FFF;*/
+    
+    position: absolute;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+}
+
+.page-title {
+    height: 50px;
+    top: 0;
+    line-height: 50px;
+    /*    border: 1px solid red;*/
+}
+
+.card-control {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.card-stock-symbol {
+    height: 220px;
+    line-height: 220px;
+    background: #ddd;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.card-stock-name {
+    padding-top: 5px;
+    font-size: 14px;
+    background: #FFF;
+    height: 60px;
+}
+
+.popup-content {
+    height: 200px;
+}
+
+.popup-symbol-bear {
+    width: 230px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 800;
+    padding-top: 50px;
+    height: 150px;
+    top: 10px;
+    position: absolute;
+    line-height: 50px;
+    background: #913030;
+    color: #FFF;
+}
+
+.popup-symbol-bull {
+    width: 230px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 800;
+    padding-top: 50px;
+    height: 150px;
+    top: 10px;
+    position: absolute;
+    line-height: 50px;
+    background: #115f11;
+    color: #FFF;
+}
+
+.popup-symbol-stable {
+    width: 230px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 800;
+    padding-top: 50px;
+    height: 150px;
+    top: 10px;
+    position: absolute;
+    line-height: 50px;
+    background: #ebbd3e;
+    color: #FFF;
+}
+
+.popup-result-total {
+    position: absolute;
+    text-align: center;
+    width: 230px;
+    bottom: 80px;
+    font-size: 15px;
+}
+
+#popup-result-bear-bar {
+    position: absolute;
+    background: #913030;
+    width: 115px;
+    height: 50px;
+    top: 150px;
+    left: 10px;
+    color: #FFF;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+}
+
+#popup-result-bull-bar {
+    position: absolute;
+    background: #115f11;
+    width: 115px;
+    height: 50px;
+    top: 150px;
+    right: 10px;
+    color: #FFF;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+}
+
+#the-bullest {
+    text-align: center;
+    padding-top: 90px;
+    font-size: 50px;
+    height: 200px;
+    background: #115f11;
+    position: relative;
+    font-weight: 800;
+    color: #FFF;
+}
+
+#the-bearest {
+    text-align: center;
+    padding-top: 90px;
+    font-size: 50px;
+    font-weight: 800;
+    color: #FFF;
+    position: relative;
+    height: 200px;
+    background: #913030;
+}
+
+.result-detail {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    font-size: 15px;
+    width: 100%;
 }

@@ -8,6 +8,7 @@
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="lib/ionic-contrib-tinder-cards/ionic.tdcards.css" rel="stylesheet">
 
     <script src="lib/firebase/firebase.js"></script>
 
@@ -17,8 +18,12 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-contrib-tinder-cards/ionic.tdcards.js"></script>
+    <script src="lib/collide/collide.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
@@ -30,17 +35,38 @@
         <ion-header-bar class="bar-dark">
             <h1 class="title">Stock2Day</h1>
         </ion-header-bar>
-        <ion-content scroll="false">
-            <center>
-                <div class="current-stock">
-                    {{currentStock.symbol}}
-                    <br>
-                    <br> {{currentStock.name}}
+        <ion-content scroll="false" id="stock-content">
+            <div ng-show="mode==='VOTE'">
+                <center>
+                    <div class="page-title">
+                        <div id="bear-title">Bear</div>
+                        <i class="ion-reply"></i>
+                        <i class="ion-forward"></i>
+                        <div id="bull-title">Bull</div>
+                    </div>
+
+                    <td-cards id="card-cards" ng-repeat="card in cards track by $index">
+                        <td-card class="card-stock" on-partial-swipe="cardPartialSwipe(amt)" on-swipe-left="cardSwipedLeft(card.symbol)" on-swipe-right="cardSwipedRight(card.symbol)">
+                            <div class="card-stock-symbol">{{card.symbol}}</div>
+                            <div class="card-stock-name">{{card.name}}</div>
+                        </td-card>
+                    </td-cards>
+
+                    <div class="card-control">
+                        <!--                    <button class="button button-assertive" ng-click="bear(currentStock.symbol)">BEAR</button>-->
+                        <button class="button button-energized">PASS</button>
+                        <!--                    <button class="button button-balanced">BULL</button>-->
+                    </div>
+                </center>
+            </div>
+            <div ng-hide="mode==='VOTE'">
+                <div id="the-bullest">{{bullest}}
+                    <div class="result-detail">BULLNESS: {{votes[bullest].bull- votes[bullest].bear}}</div>
                 </div>
-                <button class="button button-assertive" ng-click="bear(currentStock.symbol)">BEAR</button>
-                <button class="button button-energized">PASS</button>
-                <button class="button button-balanced">BULL</button>
-            </center>
+                <div id="the-bearest">{{bearest}}
+                    <div class="result-detail">BEARNESS: {{votes[bearest].bear - votes[bearest].bull}}</div>
+                </div>
+            </div>
         </ion-content>
     </ion-pane>
 </body>
