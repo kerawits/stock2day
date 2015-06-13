@@ -1,0 +1,8 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Users/kerawits/Git/Stock2Day/www/js/StockService.js",
+        "/Users/kerawits/Git/Stock2Day/www/lib/ionic-contrib-tinder-cards/example/www/lib/js/ionic.bundle.min.js",
+        "/Users/kerawits/Git/Stock2Day/www/lib/ionic-contrib-tinder-cards/example/www/lib/js/ionic.js",
+        "/Users/kerawits/Git/Stock2Day/www/lib/ionic-contrib-tinder-cards/example/www/lib/js/ionic.min.js"
+    ]
+}
