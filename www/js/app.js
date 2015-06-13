@@ -99,19 +99,55 @@
                 ref.child('STOCKVOTES').child(DATE).child(symbol).child('bull').transaction(function (count) {
                     return count ? count + 1 : 1;
                 }, function () {}, false);
+
+                ref.child('STOCKVOTES').child(DATE).child(symbol).child('bear').transaction(function (count) {
+                    return count ? count : 0;
+                }, function () {}, false);
             };
 
             this.BEAR = function (symbol) {
                 ref.child('STOCKVOTES').child(DATE).child(symbol).child('bear').transaction(function (count) {
                     return count ? count + 1 : 1;
                 }, function () {}, false);
+
+                ref.child('STOCKVOTES').child(DATE).child(symbol).child('bull').transaction(function (count) {
+                    return count ? count : 0;
+                }, function () {}, false);
             };
+
+            this.PASS = function (symbol) {
+
+                var i;
+                $timeout(function () {
+                    for (i = 0; i < STOCKS.length; i += 1) {
+                        if (STOCKS[i].symbol === symbol) {
+                            STOCKS.splice(i, 1);
+                            break;
+                        }
+                    }
+                });
+            };
+
+            this.StockReload = function () {
+                ref.child('STOCKS').once('value', function (snapShot) {
+                    var stockobj = snapShot.val(),
+                        key;
+
+                    for (key in stockobj) {
+                        if (stockobj.hasOwnProperty(key)) {
+                            pushSTOCKS(stockobj[key]);
+                        }
+                    }
+                });
+            };
+
         })
         .controller('Stock2DayCtrl', function ($scope, TDCardDelegate, StockService, $ionicPopup, $timeout) {
 
             var ref = new Firebase("https://stock2day.firebaseio.com/"),
                 contentSelector = $('#stock-content');
 
+            //            $scope.mode = 'RESULT';
             $scope.mode = 'VOTE';
 
             ref.child('SYSTEM').on('child_added', function (snapshot) {
@@ -158,7 +194,7 @@
                     contentSelector.css({
                         background: '#FFF'
                     });
-                }, 1000);
+                }, 2000);
 
                 $scope.showResultPopup(symbol);
             };
@@ -176,7 +212,7 @@
                     contentSelector.css({
                         background: '#FFF'
                     });
-                }, 1000);
+                }, 2000);
 
 
                 $scope.showResultPopup(symbol);
@@ -200,13 +236,32 @@
                 //                }
             };
 
-            $scope.cardPass = function (symbol) {
-                console.log('PASS: ', symbol);
+            $scope.cardPassClicked = function (symbol) {
+                console.log('PASS:');
                 StockService.PASS(symbol);
+            };
+
+            $scope.cardReload = function () {
+                StockService.StockReload();
             };
 
             $scope.showResultPopup = function (symbol) {
                 $scope.currentStock = symbol;
+
+                if (!$scope.votes[symbol]) {
+                    $scope.votes[symbol] = {
+                        bull: 0,
+                        bear: 0
+                    };
+                } else {
+                    if (!$scope.votes[symbol].bull) {
+                        $scope.votes[symbol].bull = 0;
+                    }
+
+                    if (!$scope.votes[symbol].bear) {
+                        $scope.votes[symbol].bear = 0;
+                    }
+                }
 
                 console.log('SYMBOL: ', symbol);
                 console.log('BULL: ', $scope.votes[symbol].bull);
@@ -216,6 +271,10 @@
                 var myPopup = $ionicPopup.show({
                     template: '<div class="popup-content"><div ng-show="votes[currentStock].bear > votes[currentStock].bull" class="popup-symbol-bear">{{currentStock}}</div><div ng-show="votes[currentStock].bear < votes[currentStock].bull" class="popup-symbol-bull">{{currentStock}}</div><div ng-show="votes[currentStock].bear === votes[currentStock].bull" class="popup-symbol-stable">{{currentStock}}</div><div id="popup-result-bear-bar">{{votes[currentStock].bear}}</div><div id="popup-result-bull-bar">{{votes[currentStock].bull}}</div><div class="popup-result-total">Total Votes : {{votes[currentStock].bull+votes[currentStock].bear}}</div>',
                     //                    title: 'BULL-BEAR SCALE',
+
+                    //                    template: '<div class="popup-content"><div ng-switch="result"><div ng-swith-when="BEAR" class="popup-symbol-bear">{{currentStock}}</div><div ng-swith-when="BULL" class="popup-symbol-bull">{{currentStock}}</div><div ng-switch-default class="popup-symbol-stable">{{currentStock}}</div></div><div id="popup-result-bear-bar">{{votes[currentStock].bear}}</div><div id="popup-result-bull-bar">{{votes[currentStock].bull}}</div><div class="popup-result-total">Total Votes : {{votes[currentStock].bull+votes[currentStock].bear}}</div>',
+
+
                     subTitle: '',
                     scope: $scope,
                     buttons: [

@@ -66,6 +66,30 @@
     height: 60px;
 }
 
+.card-next {
+    margin-top: 30px;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    border: 0px;
+    font-size: 2.5em;
+    line-height: 1.4em;
+    text-align: center;
+    background: #ebbd3e;
+}
+
+#card-reload {
+    margin-top: 310px;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    border: 0px;
+    font-size: 2.5em;
+    line-height: 1.4em;
+    text-align: center;
+    background: #ebbd3e;
+}
+
 .popup-content {
     height: 200px;
 }
@@ -75,10 +99,8 @@
     text-align: center;
     font-size: 50px;
     font-weight: 800;
-    padding-top: 50px;
-    height: 150px;
-    top: 10px;
-    position: absolute;
+    padding-top: 35px;
+    height: 110px;
     line-height: 50px;
     background: #913030;
     color: #FFF;
@@ -89,10 +111,8 @@
     text-align: center;
     font-size: 50px;
     font-weight: 800;
-    padding-top: 50px;
-    height: 150px;
-    top: 10px;
-    position: absolute;
+    padding-top: 35px;
+    height: 110px;
     line-height: 50px;
     background: #115f11;
     color: #FFF;
@@ -103,10 +123,8 @@
     text-align: center;
     font-size: 50px;
     font-weight: 800;
-    padding-top: 50px;
-    height: 150px;
-    top: 10px;
-    position: absolute;
+    padding-top: 35px;
+    height: 110px;
     line-height: 50px;
     background: #ebbd3e;
     color: #FFF;
@@ -121,12 +139,10 @@
 }
 
 #popup-result-bear-bar {
-    position: absolute;
+    display: inline-block;
     background: #913030;
     width: 115px;
     height: 50px;
-    top: 150px;
-    left: 10px;
     color: #FFF;
     font-size: 20px;
     line-height: 50px;
@@ -134,12 +150,10 @@
 }
 
 #popup-result-bull-bar {
-    position: absolute;
+    display: inline-block;
     background: #115f11;
     width: 115px;
     height: 50px;
-    top: 150px;
-    right: 10px;
     color: #FFF;
     font-size: 20px;
     line-height: 50px;
@@ -173,5 +187,13 @@
     position: absolute;
     bottom: 0;
     font-size: 15px;
+    width: 100%;
+}
+
+#ads {
+    text-align: center;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
     width: 100%;
 }
