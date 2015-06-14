@@ -13,20 +13,35 @@
     font-size: 4em;
 }
 
+.bar-dark-blue {
+    background: #145984;
+    color: #FFF;
+    z-index: 10;
+}
+
+.bar-dark-blue .title {
+    color: #FFF;
+    /*    font-weight: 800;*/
+    
+    font-size: 20px;
+}
+
 #bear-title {
     position: absolute;
     left: 20px;
     top: 0px;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 800;
+    color: #c11616;
 }
 
 #bull-title {
     position: absolute;
     right: 20px;
     top: 0px;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 800;
+    color: #21a821;
 }
 
 .card-stock {
@@ -196,4 +211,10 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.bg-img {
+    position: fixed;
+    width: 100%;
+    padding: 50px;
 }

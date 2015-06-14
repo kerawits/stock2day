@@ -32,10 +32,11 @@
 
 <body ng-app="starter" ng-controller="Stock2DayCtrl">
     <ion-pane>
-        <ion-header-bar class="bar-dark">
+        <ion-header-bar class="bar-dark-blue">
             <h1 class="title">Stock2Day</h1>
         </ion-header-bar>
         <ion-content scroll="false" id="stock-content">
+            <img class="bg-img" src="img/icon.png">
             <div ng-show="mode==='VOTE'">
                 <!--            <div ng-show="true">-->
                 <center>
@@ -56,7 +57,7 @@
                                 {{card.symbol}}
                             </div>
                             <div class="card-stock-name">{{card.name}}</div>
-                            <div class="card-next" ng-click="cardPassClicked(card.symbol)"><i class="ion-loop"></i>
+                            <div class="card-next" ng-click="cardPassClicked(card.symbol)"><i class="ion-ios-skipforward"></i>
                             </div>
                         </td-card>
                     </td-cards>

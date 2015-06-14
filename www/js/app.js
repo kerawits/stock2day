@@ -22,7 +22,7 @@
                 }
             });
         })
-        .service('StockService', function ($timeout, $cordovaDevice) {
+        .service('StockService', function ($timeout, $cordovaDevice, $q, $ionicLoading) {
 
             var DATEFULLSTRING = (new Date(Date.now() + 7 * 60 * 60 * 1000)).toISOString(),
                 DATE = ''.concat(DATEFULLSTRING.substr(0, 4), DATEFULLSTRING.substr(5, 2), DATEFULLSTRING.substr(8, 2)),
@@ -36,6 +36,18 @@
                     $timeout(function () {
                         STOCKS.push(stock);
                     });
+                },
+                shuffleArray = function (array) {
+                    var i,
+                        j,
+                        temp;
+                    for (i = array.length - 1; i > 0; i -= 1) {
+                        j = Math.floor(Math.random() * (i + 1));
+                        temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                    return array;
                 };
 
             console.log('TODAY: ', DATE);
@@ -56,6 +68,10 @@
             console.log('TODAY: ', DATE);
 
 
+            $ionicLoading.show({
+                template: '<ion-spinner></ion-spinner>'
+            });
+
             ref.child('STOCKS').once('value', function (snapShot) {
                 var stockobj = snapShot.val(),
                     key;
@@ -69,6 +85,13 @@
                         });
                     }
                 }
+
+                $timeout(function () {
+                    shuffleArray(STOCKS);
+                });
+
+                $ionicLoading.hide();
+
             });
 
             ref.child('STOCKVOTES').child(DATE).on('child_added', function (snapshot) {
@@ -129,6 +152,8 @@
             };
 
             this.StockReload = function () {
+                var defer = $q.defer();
+
                 ref.child('STOCKS').once('value', function (snapShot) {
                     var stockobj = snapShot.val(),
                         key;
@@ -138,11 +163,19 @@
                             pushSTOCKS(stockobj[key]);
                         }
                     }
+
+                    $timeout(function () {
+                        shuffleArray(STOCKS);
+                    });
+
+                    defer.resolve();
                 });
+
+                return defer.promise;
             };
 
         })
-        .controller('Stock2DayCtrl', function ($scope, TDCardDelegate, StockService, $ionicPopup, $timeout) {
+        .controller('Stock2DayCtrl', function ($scope, TDCardDelegate, StockService, $ionicPopup, $timeout, $ionicLoading) {
 
             var ref = new Firebase("https://stock2day.firebaseio.com/"),
                 contentSelector = $('#stock-content');
@@ -237,12 +270,18 @@
             };
 
             $scope.cardPassClicked = function (symbol) {
-                console.log('PASS:');
+                console.log('PASS: ', symbol);
                 StockService.PASS(symbol);
             };
 
             $scope.cardReload = function () {
-                StockService.StockReload();
+
+                $ionicLoading.show({
+                    template: '<ion-spinner></ion-spinner>'
+                });
+                StockService.StockReload().then(function () {
+                    $ionicLoading.hide();
+                });
             };
 
             $scope.showResultPopup = function (symbol) {
