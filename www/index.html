@@ -47,12 +47,13 @@
                         <div id="bull-title">Bull</div>
                     </div>
 
-                    <div id="card-reload" ng-show="cards.length===0">
-                        <i class="ion-loop" ng-click="cardReload()"></i>
+                    <div id="card-reload" ng-show="cards.length===0" ng-click="cardReload()">
+                        <i class="ion-loop"></i>
                     </div>
 
                     <td-cards id="card-cards" ng-repeat="card in cards track by $index">
-                        <td-card class="card-stock" on-partial-swipe="cardPartialSwipe(amt)" on-swipe-left="cardSwipedLeft(card.symbol)" on-swipe-right="cardSwipedRight(card.symbol)" on-destroy="cardPassClicked(card.symbol)">
+                        <!--                        <td-card class="card-stock" on-partial-swipe="cardPartialSwipe(amt)" on-swipe-left="cardSwipedLeft(card.symbol)" on-swipe-right="cardSwipedRight(card.symbol)" on-destroy="cardPassClicked(card.symbol)">-->
+                        <td-card class="card-stock" on-swipe-left="cardSwipedLeft(card.symbol)" on-swipe-right="cardSwipedRight(card.symbol)" on-destroy="cardPassClicked(card.symbol)">
                             <div class="card-stock-symbol">
                                 {{card.symbol}}
                             </div>
